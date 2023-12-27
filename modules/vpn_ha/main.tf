@@ -151,6 +151,7 @@ resource "google_compute_router_interface" "router_interface" {
 }
 
 resource "google_compute_vpn_tunnel" "tunnels" {
+  provider                        = google.nolabel
   for_each                        = var.tunnels
   project                         = var.project_id
   region                          = var.region
@@ -163,7 +164,7 @@ resource "google_compute_vpn_tunnel" "tunnels" {
   ike_version                     = each.value.ike_version
   shared_secret                   = each.value.shared_secret == "" ? local.secret : each.value.shared_secret
   vpn_gateway                     = local.vpn_gateway_self_link
-  labels                          = var.labels
+  # labels                          = var.labels
 }
 
 resource "random_id" "secret" {
