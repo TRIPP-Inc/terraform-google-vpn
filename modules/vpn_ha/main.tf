@@ -151,7 +151,6 @@ resource "google_compute_router_interface" "router_interface" {
 }
 
 resource "google_compute_vpn_tunnel" "tunnels" {
-  provider                        = google.nolabel
   for_each                        = var.tunnels
   project                         = var.project_id
   region                          = var.region
